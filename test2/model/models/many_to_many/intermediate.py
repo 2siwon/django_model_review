@@ -41,6 +41,7 @@ class Group(models.Model):
         return self.name
 
 
+# MemberShip은 Group과 Idol의 M-to-M
 class MemberShip(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     # Idol 테이블의 어떤 행이 지워지면 그 아이돌을 참조하는 Membership 테이블의 row도 모두 삭제된다.
@@ -49,12 +50,20 @@ class MemberShip(models.Model):
         on_delete=models.CASCADE,
         related_name='membership_set',
     )
-    recommender = models.ForeignKey(
+    # recommender = models.ForeignKey(
+    #     Idol,
+    #     null=True,
+    #     on_delete=models.SET_NULL,
+    #     related_name='recommend_membership_set',
+    # )
+
+    # MemberShip과 Idol의 M-to-M
+    recommenders = models.ManyToManyField(
         Idol,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='recommend_membership_set',
+        blank=True,
+        related_name='recommenders_membership_set',
     )
+
     joined_date = models.DateField()
     is_active = models.BooleanField()
 
