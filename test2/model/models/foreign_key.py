@@ -33,5 +33,10 @@ class User(models.Model):
         blank=True,
     )
 
+    def save(self, *args, **kwargs):
+        if self.teacher and self.teacher.pk == self.pk:
+            self.teacher = None
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.name
+        return f'내 이름 : {self.name}'

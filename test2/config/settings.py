@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     # User applications
     'blog',
+    'inheritance',
     # Databases
     'model',
 ]
