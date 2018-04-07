@@ -61,7 +61,7 @@ class MemberShip(models.Model):
     recommenders = models.ManyToManyField(
         Idol,
         blank=True,
-        related_name='recommenders_membership_set',
+        related_name='recommend_membership_set',
     )
 
     joined_date = models.DateField()
